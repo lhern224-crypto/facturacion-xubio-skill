@@ -1,0 +1,17 @@
+{
+  "xubio_url": "https://xubio.com",
+  "panel_url": "https://claude.ai/artifact/TU_PANEL",
+  "carpeta_datos": "%USERPROFILE%\\Documents\\Facturacion-Xubio",
+  "anio_fiscal": 2026,
+  "periodicidad_iva": "cuatrimestral",
+  "ultimo_digito_nit": 0,
+  "vencimientos_iva": {
+    "Ene-Abr 2026": "AAAA-MM-DD",
+    "May-Ago 2026": "AAAA-MM-DD",
+    "Sep-Dic 2026": "AAAA-MM-DD"
+  },
+  "fuente_vencimientos": "Calendario tributario DIAN segun el ultimo digito de tu NIT; confirmar cada año en dian.gov.co",
+  "etiqueta_gmail_solicitudes": "Cotizaciones",
+  "etiqueta_gmail_procesada": "Cotizaciones/Procesada",
+  "tarifa_iva_por_defecto": 0.19
+}
