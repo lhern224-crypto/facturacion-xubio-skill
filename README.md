@@ -1,40 +1,44 @@
 # facturacion-xubio
 
-Skill de Claude Code que automatiza la facturación de un negocio pequeño en **Xubio Colombia**, que no tiene API abierta. Claude trabaja con el navegador y con scripts de Python sobre los reportes en Excel.
+English | [Español](README.es.md)
 
-## Qué hace
+A Claude Code skill that automates invoicing for a small business on **Xubio Colombia**, which has no open API. Claude works through the browser and with Python scripts over the Excel reports.
 
-| Modo | Resultado |
+The skill's own instructions (`SKILL.md`, `reference/`) are written in Spanish, because Xubio's menus and the tax terms it handles are in Spanish.
+
+## What it does
+
+| Mode | Result |
 |---|---|
-| `sincronizar` | Descarga los Libros de IVA de Xubio, los normaliza y actualiza un panel de impuestos (artefacto de Claude). |
-| `cotizaciones` | Convierte solicitudes (Gmail con etiqueta, o archivos) en cotizaciones dentro de Xubio. |
-| `facturar` | Pasa cotizaciones aprobadas a facturas de venta, una a una o con el importador masivo. |
-| `impuestos` | Resume facturado, IVA del período, retenciones y próximo vencimiento. |
+| `sincronizar` | Downloads Xubio's VAT ledgers, normalizes them and updates a tax dashboard (a Claude artifact). |
+| `cotizaciones` | Turns requests (labeled Gmail threads, or files) into quotes inside Xubio. |
+| `facturar` | Turns approved quotes into sales invoices, one by one or with the bulk importer. |
+| `impuestos` | Summarizes amount invoiced, VAT for the period, withholdings and the next due date. |
 
-Las compras (IVA descontable) salen de la exportación de documentos recibidos del catálogo de la DIAN, clasificadas por proveedor como del negocio o personales.
+Purchases (deductible VAT) come from the received-documents export of the DIAN catalog, classified by supplier as business or personal.
 
-## Cómo está construida
+## How it is built
 
-- `SKILL.md`: instrucciones que sigue Claude, con los modos, el calendario y las reglas de seguridad.
-- `config.example.json`: configuración de ejemplo. Cópiala como `config.json` y llénala.
-- `reference/xubio-rutas.md`: rutas de menú y comportamientos de Xubio ya verificados, para que Claude no los redescubra en cada ejecución.
-- `scripts/`: normalizadores y generadores de archivos de importación.
+- `SKILL.md`: the instructions Claude follows, with the modes, the calendar and the safety rules.
+- `config.example.json`: sample configuration. Copy it as `config.json` and fill it in.
+- `reference/xubio-rutas.md`: Xubio menu paths and behaviors already verified, so Claude does not rediscover them on every run.
+- `scripts/`: normalizers and import-file generators.
 
-| Script | Uso |
+| Script | Use |
 |---|---|
-| `normalizar_reportes.py` | Libros IVA de Xubio → `ventas.csv` / `compras_xubio.csv` |
-| `normalizar_dian_recibidos.py` | Excel de recibidos de la DIAN → `compras.csv` |
-| `crear_clasificacion_inicial.py` | Primera clasificación de proveedores por categoría |
-| `excel_compras_organizadas.py` | Excel de compras ordenado por categoría |
-| `generar_import_proveedores.py` | Archivo para importar proveedores a Xubio |
-| `generar_import_compras.py` | Archivo para importar facturas de compra |
-| `generar_import_facturas.py` | Archivo para importar facturas de venta |
+| `normalizar_reportes.py` | Xubio VAT ledgers → `ventas.csv` / `compras_xubio.csv` |
+| `normalizar_dian_recibidos.py` | DIAN received-documents Excel → `compras.csv` |
+| `crear_clasificacion_inicial.py` | First classification of suppliers by category |
+| `excel_compras_organizadas.py` | Purchases Excel sorted by category |
+| `generar_import_proveedores.py` | File to import suppliers into Xubio |
+| `generar_import_compras.py` | File to import purchase invoices |
+| `generar_import_facturas.py` | File to import sales invoices |
 
-## Documentos
+## Documents
 
-- [Instalación y configuración](docs/INSTALACION.md)
-- [Seguridad y límites](docs/SEGURIDAD-Y-LIMITES.md)
+- [Installation and setup](docs/INSTALLATION.md)
+- [Security and limits](docs/SECURITY-AND-LIMITS.md)
 
-## Aviso
+## Disclaimer
 
-Las cifras de impuestos son estimados para seguimiento. Revísalas con tu contador antes de declarar. Este proyecto no está afiliado a Xubio, a la DIAN ni a Anthropic.
+Tax figures are estimates for tracking. Review them with your accountant before filing. This project is not affiliated with Xubio, the DIAN or Anthropic.
